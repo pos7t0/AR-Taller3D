@@ -1,1 +1,0 @@
-# AR-Taller3D
