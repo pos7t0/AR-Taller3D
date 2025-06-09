@@ -19,11 +19,11 @@ public class PuzzlePiece : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if (m_piece!=null)
+        if (other!=null&& m_piece != null)
         {
+            Debug.Log("no esta");
             if (other.gameObject.name == m_piece.name)
             {
-                
                 m_inPlace = true;
                 ChangeMaterial();
                 GetComponentInParent<PuzzleSystem>().CompletePuzzle();

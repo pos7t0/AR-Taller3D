@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class Enum
+public enum TypeOfBone
 {
-    
+    Craneo,Mandibula,espalda
 }

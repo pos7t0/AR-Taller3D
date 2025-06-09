@@ -52,7 +52,7 @@ public class ObjectManipulation : MonoBehaviour
 
                 case TouchPhase.Ended:
                     
-                    Debug.Log($"[New Input] Touch ended at: {pos}, fingerId: {touch.finger.index}");
+                    //Debug.Log($"[New Input] Touch ended at: {pos}, fingerId: {touch.finger.index}");
                     break;
             }
         }
@@ -145,14 +145,21 @@ public class ObjectManipulation : MonoBehaviour
 
     public void DeleteModel()
     {
+        
         if (m_arInteractionObject==null)
         {
+            
             return;
         }
-        if(m_arInteractionObject.CanDelete())
-        Destroy(m_arObject);
-        m_arObject = null;
-        m_arInteractionObject = null;
+        Debug.Log(m_arInteractionObject.CanDelete());
+        if (m_arInteractionObject.CanDelete())
+        {
+            FindAnyObjectByType<HUDPuzzle>().AddElement(m_arInteractionObject.GetTypeOfBone());
+            Destroy(m_arObject);
+            m_arObject = null;
+            m_arInteractionObject = null;
+        }
+        
     }
 
 
