@@ -25,6 +25,15 @@ public class HUDPuzzle : MonoBehaviour
         }
     }
 
+    public void HideMenu()
+    {
+        m_piecesPanel.SetTrigger("Hide");
+    }
+    public void ShowMenu()
+    {
+        m_piecesPanel.SetTrigger("Show");
+    }
+
     public void HideButton(GameObject button)
     {
         button.SetActive(false);

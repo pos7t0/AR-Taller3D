@@ -18,6 +18,8 @@ public class ObjectManipulation : MonoBehaviour
 
     [SerializeField] private float m_screenfactor;
 
+    [SerializeField] private bool m_changeAxis;
+
     private void Start()
     {
         m_arCamera = Camera.main;
@@ -81,12 +83,18 @@ public class ObjectManipulation : MonoBehaviour
             camRight.y = 0;
             camRight.Normalize();
 
-            // Movimiento relativo a la vista
-            Vector3 move = (camRight * diffPos.x + camForward * diffPos.y) * m_speedMovement;
+            // Movimiento relativo a la vista (XZ)
+            Vector3 moveXZ = (camRight * diffPos.x + camForward * diffPos.y) * m_speedMovement;
+
+            // Movimiento vertical (Y)
+            Vector3 moveY = Vector3.up * diffPos.y * m_speedMovement;
+
+            // Elegir el tipo de movimiento según el booleano
+            Vector3 move = m_changeAxis ? moveY : moveXZ;
 
             m_arObject.transform.position += move;
 
-            //Debug.Log($"Moviendo según cámara: {move}");
+            // Guardamos la nueva posición inicial
             m_initialTouchPos = pos;
         }
     }
@@ -160,6 +168,11 @@ public class ObjectManipulation : MonoBehaviour
             m_arInteractionObject = null;
         }
         
+    }
+
+    public void ChangeAxis()
+    {
+        m_changeAxis = m_changeAxis ? false : true;
     }
 
 
