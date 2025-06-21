@@ -14,6 +14,8 @@ public class ObjectManipulation : MonoBehaviour
     private bool m_isARObjectSelected;
     private Vector2 m_initialTouchPos;
 
+    [SerializeField] private bool m_isRotationMode = false;
+
     [SerializeField] private float m_speedMovement = 4.0f;
 
     [SerializeField] private float m_screenfactor;
@@ -42,25 +44,21 @@ public class ObjectManipulation : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-
                     m_initialTouchPos = pos;
                     m_isARObjectSelected = CheckTouchOnARObject(m_initialTouchPos);
                     break;
 
                 case TouchPhase.Moved:
-
-                    ARMovement(pos);
+                    if (m_isRotationMode)
+                        ARRotation(pos);
+                    else
+                        ARMovement(pos);
                     break;
 
                 case TouchPhase.Ended:
-                    
-                    //Debug.Log($"[New Input] Touch ended at: {pos}, fingerId: {touch.finger.index}");
                     break;
             }
         }
-
-        //  ROTACIÓN (fuera del foreach)
-        ARRotation();
     }
 
     private void ARMovement(Vector2 pos)
@@ -99,34 +97,20 @@ public class ObjectManipulation : MonoBehaviour
         }
     }
 
-    private void ARRotation()
+    private void ARRotation(Vector2 pos)
     {
         if (!m_isARObjectSelected || m_arObject == null)
-        {
             return;
-        }
-        if (Touch.activeTouches.Count == 2 && m_arInteractionObject.CanRotate())
+
+        if (m_arInteractionObject.CanRotate())
         {
-
-            var touch0 = Touch.activeTouches[0];
-            var touch1 = Touch.activeTouches[1];
-
-            Vector2 prevTouch0 = touch0.screenPosition - touch0.delta;
-            Vector2 prevTouch1 = touch1.screenPosition - touch1.delta;
-
-            float prevAngle = Vector2.SignedAngle(prevTouch1 - prevTouch0, Vector2.right);
-            float currAngle = Vector2.SignedAngle(touch1.screenPosition - touch0.screenPosition, Vector2.right);
-            float angleDelta = currAngle - prevAngle;
-
-            if (m_arObject != null)
-            {
-                m_arObject.transform.Rotate(Vector3.up, angleDelta, Space.World);
-                Debug.Log($"Rotando: {angleDelta}°");
-            }
+            float rotationDelta = (pos.x - m_initialTouchPos.x) * 0.2f; // Puedes ajustar el factor
+            m_arObject.transform.Rotate(Vector3.up, rotationDelta, Space.World);
+            m_initialTouchPos = pos;
         }
     }
 
-    
+
     private bool CheckTouchOnARObject(Vector2 touchPosition)
     {
         Ray ray = m_arCamera.ScreenPointToRay(touchPosition);
@@ -175,6 +159,10 @@ public class ObjectManipulation : MonoBehaviour
         m_changeAxis = m_changeAxis ? false : true;
     }
 
+    public void ToggleRotationMode()
+    {
+        m_isRotationMode = !m_isRotationMode;
+    }
 
 
 

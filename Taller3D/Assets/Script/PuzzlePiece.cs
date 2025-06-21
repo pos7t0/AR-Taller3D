@@ -80,9 +80,4 @@ public class PuzzlePiece : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        
-    }
-
 }
