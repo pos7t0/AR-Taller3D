@@ -12,8 +12,8 @@ public class SkullMovement : MonoBehaviour
         // Buscar el plano donde fue colocado el objeto
         planoBase = FindObjectOfType<ARFloorDetector>()?.GetPlaneDetected();
 
-        if (planoBase == null)
-            Debug.LogWarning("No se encontró el plano base.");
+        //if (planoBase == null)
+            
     }
 
     void Update()
@@ -41,7 +41,7 @@ public class SkullMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log("No puedes salir del plano AR.");
+            
         }
     }
 

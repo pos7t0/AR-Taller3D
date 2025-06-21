@@ -10,7 +10,7 @@ public class ARInteractionObject : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Rotation " + gameObject.name + ": " + gameObject.transform.eulerAngles.y);
+
     }
     public bool CanMove()
     {

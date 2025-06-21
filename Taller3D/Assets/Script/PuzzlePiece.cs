@@ -29,6 +29,7 @@ public class PuzzlePiece : MonoBehaviour
     {
         if (other.TryGetComponent(out ARInteractionObject _))
         {
+            Debug.Log("pieza encontrada");
             m_piece =other.gameObject;
         }
     }
@@ -41,6 +42,7 @@ public class PuzzlePiece : MonoBehaviour
             ChangeMaterial(m_originalMaterial);
             return;
         }
+        
         bool samePiece = m_piece.GetComponent<ARInteractionObject>().GetTypeOfBone() == m_typeOfBone;
         if (!samePiece)
         {
