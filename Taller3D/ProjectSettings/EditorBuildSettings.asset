@@ -5,18 +5,27 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 1
+    path: Assets/Scenes/Inicio.unity
     guid: 4755b35b590504809a7525fd2109c2e2
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Pruebas.unity
     guid: 07877fd8fbb8c7046bd1dd4165d14bab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LVL_ArmarBaja.unity
     guid: 8a4ea72dbad751e418b980c6ecadb01b
   - enabled: 1
     path: Assets/Scenes/LVL_ArmarMedio.unity
     guid: 99784bae2e45f954192e36028bd0b158
+  - enabled: 1
+    path: Assets/Scenes/LVL_ArmarCraneo.unity
+    guid: 2df320ad2febb7e46851ee5ff3254a64
+  - enabled: 1
+    path: Assets/Scenes/SeleccionDeModo.unity
+    guid: 9316b201b50068b4fa9cd8c0c817aac7
+  - enabled: 1
+    path: Assets/Scenes/SeleccionDeZona.unity
+    guid: 3df8ab4c3293c09459c6f6855349070f
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}
