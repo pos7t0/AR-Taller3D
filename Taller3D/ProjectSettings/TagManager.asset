@@ -6,7 +6,6 @@ TagManager:
   tags:
   - AROject
   - ARObject
-  - Bullet
   layers:
   - Default
   - TransparentFX
