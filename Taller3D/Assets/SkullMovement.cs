@@ -1,11 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
+using TMPro;
 
 public class SkullMovement : MonoBehaviour
 {
+    //code para pelear
+    [SerializeField] private float m_health;
+    [SerializeField] private TypeOfBone m_attackZone;
+    [SerializeField] private TMP_Text text;
+    //hasta aqui
     public float velocidad = 2f;
     private ARPlane planoBase;
+
 
     void Start()
     {
@@ -18,6 +25,7 @@ public class SkullMovement : MonoBehaviour
 
     void Update()
     {
+        text.text = "vida: "+m_health;
         // este sistema era para probar que se mueve el objeto en 3D, 
         // trata de ver como es que se mueva el personaje
         Vector3 direccion = Vector3.zero;
@@ -69,4 +77,13 @@ public class SkullMovement : MonoBehaviour
 
         return dentro;
     }
+    //73
+    public void TakeDamage(TypeOfBone boneHit,float damage)
+    {
+        if (m_attackZone==boneHit)
+        {
+            m_health -= damage;
+        }
+    }
+
 }
