@@ -126,29 +126,22 @@ public class ObjectManipulation : MonoBehaviour
     {
         Ray ray = m_arCamera.ScreenPointToRay(touchPosition);
 
+        Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 2f);
+
         if (Physics.Raycast(ray, out RaycastHit hitARObject))
         {
-            // Primero verifica si es un hueso con información
-            BoneInfoDisplay infoDisplay = hitARObject.collider.GetComponent<BoneInfoDisplay>();
-            if (infoDisplay != null && infoDisplay.IsShowingInfo())
-            {
-                infoDisplay.HideBoneInfo();
-                return false;
-            }
-            else if (infoDisplay != null)
-            {
-                infoDisplay.ShowBoneInfo(hitARObject.collider.GetComponent<ARInteractionObject>());
-                return false;
-            }
-
-            // Lógica original para objetos interactivos
+            
             if (hitARObject.collider.transform.TryGetComponent(out ARInteractionObject _))
             {
+                
                 m_arObject = hitARObject.transform.gameObject;
                 m_arInteractionObject = hitARObject.transform.gameObject.GetComponent<ARInteractionObject>();
                 return true;
             }
+            Debug.Log(hitARObject.collider.gameObject.name);
+
         }
+        
 
         return false;
     }
