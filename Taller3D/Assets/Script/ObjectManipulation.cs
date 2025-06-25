@@ -20,6 +20,11 @@ public class ObjectManipulation : MonoBehaviour
     [SerializeField] public Sprite m_xzAxisSprite; // Sprite para el modo XZ
     [SerializeField] public Sprite m_yAxisSprite;  // Sprite para el modo Y
 
+    [SerializeField] public Image transformToggleButtonImage; // Referencia a la imagen del botón
+    [SerializeField] public Sprite transform;  // Sprite para el modo Y
+    [SerializeField] public Sprite rotate;  // Sprite para el modo Y
+
+
     [SerializeField] private bool m_isRotationMode = false;
 
     [SerializeField] private float m_speedMovement = 4.0f;
@@ -173,10 +178,18 @@ public class ObjectManipulation : MonoBehaviour
             m_axisToggleButtonImage.sprite = m_changeAxis ? m_yAxisSprite : m_xzAxisSprite;
         }
     }
+    private void UpdateTransformButtonImage()
+    {
+        if (transformToggleButtonImage != null)
+        {
+            transformToggleButtonImage.sprite = m_isRotationMode ?  rotate : transform;
+        }
+    }
 
     public void ToggleRotationMode()
     {
         m_isRotationMode = !m_isRotationMode;
+        UpdateTransformButtonImage();
     }
 
 
