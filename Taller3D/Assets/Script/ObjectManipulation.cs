@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
@@ -14,11 +13,6 @@ public class ObjectManipulation : MonoBehaviour
 
     private bool m_isARObjectSelected;
     private Vector2 m_initialTouchPos;
-
-    [Header("UI References")]
-    [SerializeField] public Image m_axisToggleButtonImage; // Referencia a la imagen del botón
-    [SerializeField] public Sprite m_xzAxisSprite; // Sprite para el modo XZ
-    [SerializeField] public Sprite m_yAxisSprite;  // Sprite para el modo Y
 
     [SerializeField] private bool m_isRotationMode = false;
 
@@ -162,16 +156,7 @@ public class ObjectManipulation : MonoBehaviour
 
     public void ChangeAxis()
     {
-        m_changeAxis = !m_changeAxis;
-        UpdateAxisButtonImage(); // Actualiza la imagen al cambiar el eje
-    }
-
-    private void UpdateAxisButtonImage()
-    {
-        if (m_axisToggleButtonImage != null)
-        {
-            m_axisToggleButtonImage.sprite = m_changeAxis ? m_yAxisSprite : m_xzAxisSprite;
-        }
+        m_changeAxis = m_changeAxis ? false : true;
     }
 
     public void ToggleRotationMode()

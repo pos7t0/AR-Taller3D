@@ -18,28 +18,14 @@ MonoBehaviour:
   m_PlatformId: b9b35072a6f44c2e863f17467ea3dc13
   m_PlatformBuildProfile:
     rid: 6090848621369491534
-  m_OverrideGlobalSceneList: 1
-  m_Scenes:
-  - m_enabled: 1
-    m_path: Assets/Scenes/Inicio.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/SeleccionDeModo.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/SeleccionDeZona.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/LVL_ArmarMedio.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/LVL_ArmarCraneo.unity
-  - m_enabled: 1
-    m_path: Assets/Scenes/LVL_ArmarBaja.unity
+  m_OverrideGlobalSceneList: 0
+  m_Scenes: []
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 6090848621369491534
       type: {class: AndroidPlatformBuildSettings, ns: UnityEditor.Android, asm: UnityEditor.Android.Extensions}
       data:
