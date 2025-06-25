@@ -1,1 +1,0 @@
-C:\Users\Patricio\Documents\Github\AR-Taller3D\Taller3D\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\1ws4v293\obj\arm64-v8a
