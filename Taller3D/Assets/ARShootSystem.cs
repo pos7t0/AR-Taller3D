@@ -7,6 +7,9 @@ public class ARShootSystem : MonoBehaviour
     [SerializeField] private GameObject proyectilPrefab;
     [SerializeField] private float velocidadDisparo = 10f;
     [SerializeField] private float m_intervalShoot = 2f;
+    [Header("Sonido")]
+    [SerializeField] private AudioSource m_audioSource;
+    [SerializeField] private AudioClip m_shootSound;
     private bool m_istouch=false;
     private float m_timer=0;
     void Update()
@@ -29,7 +32,7 @@ public class ARShootSystem : MonoBehaviour
         Quaternion rotacion = Camera.main.transform.rotation;
 
         GameObject proyectil = Instantiate(proyectilPrefab, origen, rotacion);
-
+        m_audioSource.PlayOneShot(m_shootSound);
         // Aplicar fuerza en la direcci�n de la c�mara
         Rigidbody rb = proyectil.GetComponent<Rigidbody>();
         if (rb != null)

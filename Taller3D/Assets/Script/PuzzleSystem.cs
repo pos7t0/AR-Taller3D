@@ -6,9 +6,11 @@ public class PuzzleSystem : MonoBehaviour
     [SerializeField]private PuzzlePiece[] m_pieces;
     [SerializeField] private Slider m_sliderProgress;
 
+
+
     private void Start()
     {
-        ShowInFrontOfCamera();
+        ShowInFrontOfCamera(2);
         m_sliderProgress.value = 0;
         m_sliderProgress.maxValue = m_pieces.Length;
     }

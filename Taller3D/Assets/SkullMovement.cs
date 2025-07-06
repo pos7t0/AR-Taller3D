@@ -4,20 +4,28 @@ using UnityEngine.XR.ARFoundation;
 
 public class SkullMovement : MonoBehaviour
 {
+    [SerializeField] private float m_health;
+    [SerializeField] private TypeOfBone m_weakZone;
+    [SerializeField] private float m_weakDuration;
     public float velocidad = 2f;
     private ARPlane planoBase;
+    private float m_timerWeakZone=0f;
+    private HUDShotter m_hudShotter;
 
     void Start()
     {
         // Buscar el plano donde fue colocado el objeto
         planoBase = FindObjectOfType<ARFloorDetector>()?.GetPlaneDetected();
-
+        m_hudShotter = FindAnyObjectByType<HUDShotter>();
+        m_hudShotter.ShowWeakText(m_weakZone);
+        m_hudShotter.SetSlider(m_health);
         //if (planoBase == null)
             
     }
 
     void Update()
     {
+        ChangeWeakZone();
         // este sistema era para probar que se mueve el objeto en 3D, 
         // trata de ver como es que se mueva el personaje
         Vector3 direccion = Vector3.zero;
@@ -43,6 +51,7 @@ public class SkullMovement : MonoBehaviour
         {
             
         }
+        
     }
 
     bool EstaDentroDelPlano(Vector3 posicionMundo)
@@ -68,5 +77,35 @@ public class SkullMovement : MonoBehaviour
         }
 
         return dentro;
+    }
+    private void ChangeWeakZone()
+    {
+        m_timerWeakZone += Time.deltaTime;
+        Debug.Log("tiempo para cambiar "+m_timerWeakZone);
+        if (m_timerWeakZone>m_weakDuration)
+        {
+            m_timerWeakZone = 0;
+            RandomWeakZone();
+            
+        }
+    }
+    private void RandomWeakZone()
+    {
+        TypeOfBone randomWeakZone = (TypeOfBone)Random.Range(0, System.Enum.GetValues(typeof(TypeOfBone)).Length);
+        m_weakZone = randomWeakZone;
+        m_hudShotter.ShowWeakText(m_weakZone);
+    }
+
+    public void TakeDamage(TypeOfBone boneHit,float damage)
+    {
+        if (m_weakZone==boneHit)
+        {
+            m_health -= damage;
+            m_hudShotter.ChangeSlider(m_health);
+        }
+    }
+    public TypeOfBone GetWeakZone()
+    {
+        return m_weakZone;
     }
 }

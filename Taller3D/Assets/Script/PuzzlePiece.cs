@@ -6,7 +6,8 @@ public class PuzzlePiece : MonoBehaviour
     [SerializeField] private Material m_changeMaterial;
     [SerializeField] private Material m_originalMaterial;
     [SerializeField] private Material m_errorMaterial;
-    
+    [SerializeField] private BoneInfoDisplay m_boneInfoDisplay;
+
     private GameObject m_piece;
     private bool m_inPlace=false;
     private float m_marginError=5f;
@@ -36,30 +37,38 @@ public class PuzzlePiece : MonoBehaviour
 
     private void VerifyPiece()
     {
-        if (m_piece==null)
+        if (m_piece == null)
         {
-            if(!IsInPlace())
-            ChangeMaterial(m_originalMaterial);
+            if (!IsInPlace())
+                ChangeMaterial(m_originalMaterial);
             return;
         }
-        
-        bool samePiece = m_piece.GetComponent<ARInteractionObject>().GetTypeOfBone() == m_typeOfBone;
-        if (!samePiece)
+
+        // Verifica si el objeto aún existe (puede haber sido destruido)
+        if (m_piece == null) return;
+
+        ARInteractionObject interactionObj = m_piece.GetComponent<ARInteractionObject>();
+        if (interactionObj == null)
         {
+            Debug.LogError("No ARInteractionObject found on: " + m_piece.name);
             return;
         }
+
+        bool samePiece = interactionObj.GetTypeOfBone() == m_typeOfBone;
+        if (!samePiece) return;
+
         if (RotationCheck())
         {
             m_inPlace = true;
             ChangeMaterial(m_changeMaterial);
             GetComponentInParent<PuzzleSystem>().CompletePuzzle();
+            m_boneInfoDisplay.ShowBoneInfo(interactionObj);
             Destroy(m_piece);
         }
-        else 
+        else
         {
             ChangeMaterial(m_errorMaterial);
         }
-       
     }
 
     private bool RotationCheck()

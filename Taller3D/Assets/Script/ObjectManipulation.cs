@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
@@ -14,6 +15,16 @@ public class ObjectManipulation : MonoBehaviour
     private bool m_isARObjectSelected;
     private Vector2 m_initialTouchPos;
 
+    [Header("UI References")]
+    [SerializeField] public Image m_axisToggleButtonImage; // Referencia a la imagen del botón
+    [SerializeField] public Sprite m_xzAxisSprite; // Sprite para el modo XZ
+    [SerializeField] public Sprite m_yAxisSprite;  // Sprite para el modo Y
+
+    [SerializeField] public Image transformToggleButtonImage; // Referencia a la imagen del botón
+    [SerializeField] public Sprite transform;  // Sprite para el modo Y
+    [SerializeField] public Sprite rotate;  // Sprite para el modo Y
+
+
     [SerializeField] private bool m_isRotationMode = false;
 
     [SerializeField] private float m_speedMovement = 4.0f;
@@ -24,7 +35,8 @@ public class ObjectManipulation : MonoBehaviour
 
     private void Start()
     {
-        m_arCamera = Camera.main;
+        //m_arCamera = Camera.main;
+        
     }
     private void OnEnable()
     {
@@ -115,22 +127,29 @@ public class ObjectManipulation : MonoBehaviour
     {
         Ray ray = m_arCamera.ScreenPointToRay(touchPosition);
 
-        Debug.DrawRay(ray.origin, ray.direction * 10f, Color.red, 2f);
-
         if (Physics.Raycast(ray, out RaycastHit hitARObject))
         {
-            
+            // Primero verifica si es un hueso con información
+            BoneInfoDisplay infoDisplay = hitARObject.collider.GetComponent<BoneInfoDisplay>();
+            if (infoDisplay != null && infoDisplay.IsShowingInfo())
+            {
+                infoDisplay.HideBoneInfo();
+                return false;
+            }
+            else if (infoDisplay != null)
+            {
+                infoDisplay.ShowBoneInfo(hitARObject.collider.GetComponent<ARInteractionObject>());
+                return false;
+            }
+
+            // Lógica original para objetos interactivos
             if (hitARObject.collider.transform.TryGetComponent(out ARInteractionObject _))
             {
-                
                 m_arObject = hitARObject.transform.gameObject;
                 m_arInteractionObject = hitARObject.transform.gameObject.GetComponent<ARInteractionObject>();
                 return true;
             }
-            Debug.Log(hitARObject.collider.gameObject.name);
-
         }
-        
 
         return false;
     }
@@ -156,12 +175,29 @@ public class ObjectManipulation : MonoBehaviour
 
     public void ChangeAxis()
     {
-        m_changeAxis = m_changeAxis ? false : true;
+        m_changeAxis = !m_changeAxis;
+        UpdateAxisButtonImage(); // Actualiza la imagen al cambiar el eje
+    }
+
+    private void UpdateAxisButtonImage()
+    {
+        if (m_axisToggleButtonImage != null)
+        {
+            m_axisToggleButtonImage.sprite = m_changeAxis ? m_yAxisSprite : m_xzAxisSprite;
+        }
+    }
+    private void UpdateTransformButtonImage()
+    {
+        if (transformToggleButtonImage != null)
+        {
+            transformToggleButtonImage.sprite = m_isRotationMode ?  rotate : transform;
+        }
     }
 
     public void ToggleRotationMode()
     {
         m_isRotationMode = !m_isRotationMode;
+        UpdateTransformButtonImage();
     }
 
 
