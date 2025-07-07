@@ -28,15 +28,22 @@ public class BoneCollider : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.TryGetComponent(out BulletSystem bullet))
         {
+            if (bullet.m_collision)
+            {
+                return;
+            }
+            bullet.m_collision = true;
             m_timer = 0;
-            if (GetComponentInParent<SkullMovement>().GetWeakZone()==m_boneName)
+            SkullMovement skull = GetComponentInParent<SkullMovement>();
+            if (skull.GetWeakZone()==m_boneName)
             {
                 Debug.Log("bueno");
                 ChangeColor(m_goodMaterial);
-                GetComponentInParent<SkullMovement>().TakeDamage(m_boneName, damage);
+                skull.TakeDamage(m_boneName, damage);
                 Destroy(collision.gameObject);
+                
             }
             else
             {
@@ -46,6 +53,33 @@ public class BoneCollider : MonoBehaviour
             }
             
         }
+    }
+
+    public void ReceiveHit(BulletSystem bullet)
+    {
+        m_timer = 0;
+
+        SkullMovement skull = GetComponentInParent<SkullMovement>();
+        if (skull == null)
+        {
+            Debug.LogWarning("No se encontró SkullMovement");
+            Destroy(bullet.gameObject);
+            return;
+        }
+
+        if (skull.GetWeakZone() == m_boneName)
+        {
+            Debug.Log("Impacto bueno");
+            ChangeColor(m_goodMaterial);
+            skull.TakeDamage(m_boneName, damage);
+        }
+        else
+        {
+            Debug.Log("Impacto malo");
+            ChangeColor(m_wrongMaterial);
+        }
+
+        Destroy(bullet.gameObject);
     }
 
     private void ReturnColor()

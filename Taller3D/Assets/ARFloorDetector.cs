@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using System.Collections.Generic;
+using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
@@ -19,6 +20,17 @@ public class ARFloorDetector : MonoBehaviour
 
     // Guardamos el plano detectado
     private ARPlane m_planeDetected;
+
+    void OnEnable()
+    {
+        EnhancedTouchSupport.Enable();
+    }
+
+    void OnDisable()
+    {
+        EnhancedTouchSupport.Disable();
+    }
+
 
     void Update()
     {
@@ -41,8 +53,14 @@ public class ARFloorDetector : MonoBehaviour
                         m_planeDetected = hits[0].trackable as ARPlane;
 
                         m_floorDetected = true;
+                        FindAnyObjectByType<HUDShotter>().Debug("Piso detectado y objeto colocado.");
                         Debug.Log("Piso detectado y objeto colocado.");
                     }
+                    else
+                    {
+                        FindAnyObjectByType<HUDShotter>().Debug("Piso no detectado");
+                    }
+                    //FindAnyObjectByType<HUDShotter>().Debug("");
                     break;
 
                 case TouchPhase.Moved:
@@ -53,7 +71,6 @@ public class ARFloorDetector : MonoBehaviour
             }
         }
     }
-
     // Permitir que otros scripts accedan al plano
     public ARPlane GetPlaneDetected()
     {

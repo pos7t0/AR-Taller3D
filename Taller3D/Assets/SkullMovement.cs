@@ -4,10 +4,16 @@ using UnityEngine.XR.ARFoundation;
 
 public class SkullMovement : MonoBehaviour
 {
+    [SerializeField] private Animator m_animator;
     [SerializeField] private float m_health;
     [SerializeField] private TypeOfBone m_weakZone;
     [SerializeField] private float m_weakDuration;
-    public float velocidad = 2f;
+    [SerializeField] private float m_speed = 2f;
+    private Vector3 m_targetPosition;
+    private float m_minDistanceFromPlayer = 1.5f; // Puedes ajustarlo
+    private float m_reachDistance = 0.1f;
+    private bool m_isWaiting = false;
+
     private ARPlane planoBase;
     private float m_timerWeakZone=0f;
     private HUDShotter m_hudShotter;
@@ -26,33 +32,46 @@ public class SkullMovement : MonoBehaviour
     void Update()
     {
         ChangeWeakZone();
-        // este sistema era para probar que se mueve el objeto en 3D, 
-        // trata de ver como es que se mueva el personaje
-        Vector3 direccion = Vector3.zero;
-
-        if (Keyboard.current.wKey.isPressed)
-            direccion += Vector3.forward;
-        if (Keyboard.current.sKey.isPressed)
-            direccion += Vector3.back;
-        if (Keyboard.current.aKey.isPressed)
-            direccion += Vector3.left;
-        if (Keyboard.current.dKey.isPressed)
-            direccion += Vector3.right;
-
-        if (direccion == Vector3.zero) return;
-
-        Vector3 nuevaPosicion = transform.position + direccion * velocidad * Time.deltaTime;
-
-        if (EstaDentroDelPlano(nuevaPosicion))
+        if (!m_isWaiting)
         {
-            transform.position = nuevaPosicion;
+            Vector3 direction = m_targetPosition - transform.position;
+            direction.y = 0f;
+
+            if (direction.magnitude < m_reachDistance)
+            {
+                StartWaiting();
+                return;
+            }
+
+            Vector3 moveDirection = direction.normalized;
+            Vector3 newPosition = transform.position + moveDirection * m_speed * Time.deltaTime;
+
+            if (EstaDentroDelPlano(newPosition))
+            {
+                transform.position = newPosition;
+            }
+
+            if (moveDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            }
+
+            if (m_animator != null)
+            {
+                m_animator.SetBool("Walk", true);
+            }
         }
         else
         {
-            
+            if (m_animator != null)
+            {
+                m_animator.SetBool("Walk", false);
+            }
         }
-        
+
     }
+
 
     bool EstaDentroDelPlano(Vector3 posicionMundo)
     {
@@ -107,5 +126,72 @@ public class SkullMovement : MonoBehaviour
     public TypeOfBone GetWeakZone()
     {
         return m_weakZone;
+    }
+
+    private void SetRandomTargetPosition()
+    {
+        if (planoBase == null) return;
+
+        Vector3 centroPlano = planoBase.transform.position;
+        Vector3 nuevoDestino = centroPlano;
+        int intentos = 0;
+        bool destinoValido = false;
+
+        float rango = 0.8f * Mathf.Min(planoBase.size.x, planoBase.size.y);
+
+        while (intentos < 20)
+        {
+            float offsetX = Random.Range(-rango, rango);
+            float offsetZ = Random.Range(-rango, rango);
+            nuevoDestino = planoBase.transform.position
+                         + planoBase.transform.right * offsetX
+                         + planoBase.transform.forward * offsetZ;
+
+            if (EstaDentroDelPlano(nuevoDestino) &&
+                Vector3.Distance(nuevoDestino, Camera.main.transform.position) >= m_minDistanceFromPlayer)
+            {
+                destinoValido = true;
+                break;
+            }
+
+            intentos++;
+        }
+
+        if (destinoValido)
+        {
+            m_targetPosition = nuevoDestino;
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró una posición válida dentro del plano. Se reintentará en el siguiente ciclo.");
+            m_isWaiting = true;
+            Invoke(nameof(OnIdleAnimationComplete), 2f); // espera 2 segundos y reintenta
+        }
+    }
+
+    private void StartWaiting()
+    {
+        m_isWaiting = true;
+
+        if (m_animator != null)
+        {
+            m_animator.SetTrigger("Wait");
+        }
+
+        // Mirar al jugador al detenerse
+        Vector3 lookDirection = Camera.main.transform.position - transform.position;
+        lookDirection.y = 0f;
+
+        if (lookDirection.sqrMagnitude > 0.001f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = lookRotation;
+        }
+    }
+
+    public void OnIdleAnimationComplete()
+    {
+        m_isWaiting = false;
+        SetRandomTargetPosition();
     }
 }
