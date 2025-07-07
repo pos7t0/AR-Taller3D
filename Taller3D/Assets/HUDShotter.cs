@@ -7,7 +7,8 @@ public class HUDShotter : MonoBehaviour
 {
     [SerializeField] private TMP_Text m_weakText;
     [SerializeField] private Slider m_healthVar;
-    [SerializeField] private TMP_Text m_debugger;
+    [SerializeField] private GameObject m_BTNShotter;
+    [SerializeField] private GameObject m_imagerPoint;
 
     #region Nombre de huesos
     private Dictionary<TypeOfBone, string> boneNames = new Dictionary<TypeOfBone, string>()
@@ -67,15 +68,11 @@ public class HUDShotter : MonoBehaviour
 
         }
     }
-
-    public void Debug(string a)
+    public void ActivateHUDShotter()
     {
-        m_debugger.text =a;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        m_weakText.gameObject.SetActive(true);
+        m_healthVar.gameObject.SetActive(true);
+        m_BTNShotter.SetActive(true);
+        m_imagerPoint.SetActive(true);
     }
 }

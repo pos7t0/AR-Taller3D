@@ -46,6 +46,9 @@ public class ARFloorDetector : MonoBehaviour
                     {
                         Pose pose = hits[0].pose;
 
+                        //Activar HUD
+                        GetComponent<HUDShotter>().ActivateHUDShotter();
+
                         // Instanciar objeto
                         objetoInstanciado = Instantiate(m_objectPrefab, pose.position, pose.rotation);
 
@@ -53,14 +56,9 @@ public class ARFloorDetector : MonoBehaviour
                         m_planeDetected = hits[0].trackable as ARPlane;
 
                         m_floorDetected = true;
-                        FindAnyObjectByType<HUDShotter>().Debug("Piso detectado y objeto colocado.");
+                        
                         Debug.Log("Piso detectado y objeto colocado.");
                     }
-                    else
-                    {
-                        FindAnyObjectByType<HUDShotter>().Debug("Piso no detectado");
-                    }
-                    //FindAnyObjectByType<HUDShotter>().Debug("");
                     break;
 
                 case TouchPhase.Moved:

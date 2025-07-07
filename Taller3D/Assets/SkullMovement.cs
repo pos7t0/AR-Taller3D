@@ -4,11 +4,15 @@ using UnityEngine.XR.ARFoundation;
 
 public class SkullMovement : MonoBehaviour
 {
+    [Header("Animaciones")]
+    [SerializeField] private string[] m_waitTriggers;
     [SerializeField] private Animator m_animator;
+    [Header("Atributos")]
     [SerializeField] private float m_health;
     [SerializeField] private TypeOfBone m_weakZone;
     [SerializeField] private float m_weakDuration;
     [SerializeField] private float m_speed = 2f;
+    
     private Vector3 m_targetPosition;
     private float m_minDistanceFromPlayer = 1.5f; // Puedes ajustarlo
     private float m_reachDistance = 0.1f;
@@ -173,9 +177,11 @@ public class SkullMovement : MonoBehaviour
     {
         m_isWaiting = true;
 
-        if (m_animator != null)
+        if (m_animator != null && m_waitTriggers.Length > 0)
         {
-            m_animator.SetTrigger("Wait");
+            int randomIndex = Random.Range(0, m_waitTriggers.Length);
+            string randomTrigger = m_waitTriggers[randomIndex];
+            m_animator.SetTrigger(randomTrigger);
         }
 
         // Mirar al jugador al detenerse
