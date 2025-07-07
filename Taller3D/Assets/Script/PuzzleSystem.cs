@@ -5,7 +5,7 @@ public class PuzzleSystem : MonoBehaviour
 {
     [SerializeField]private PuzzlePiece[] m_pieces;
     [SerializeField] private Slider m_sliderProgress;
-
+    [SerializeField] private string namelevel;
 
 
     private void Start()
@@ -34,7 +34,8 @@ public class PuzzleSystem : MonoBehaviour
         ChangeSlider();
         if (PuzzleIsReady())
         {
-
+            PlayerPrefs.SetInt(namelevel + "_completado", 1);
+            PlayerPrefs.Save();
         }
     }
 

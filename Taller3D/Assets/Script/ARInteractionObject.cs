@@ -19,6 +19,10 @@ public class ARInteractionObject : MonoBehaviour
 
     public void DesactivateDebugger()
     {
+        if (!m_canDebug)
+            return;
+
+
         m_horizontalBar.SetActive(false);
         m_verticalBar.SetActive(false);
         m_rotationBar.SetActive(false);

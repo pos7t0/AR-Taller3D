@@ -4091,6 +4091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7213637299852008500, guid: 5e2ce4f73a28f4346ab3790c9f0f3ea0,
         type: 3}
+      propertyPath: namelevel
+      value: lvl1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7213637299852008500, guid: 5e2ce4f73a28f4346ab3790c9f0f3ea0,
+        type: 3}
       propertyPath: m_sliderProgress
       value: 
       objectReference: {fileID: 260595793}
