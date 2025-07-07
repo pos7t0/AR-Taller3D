@@ -61,18 +61,19 @@ public class ObjectManipulation : MonoBehaviour
                         ARRotation(pos);
                     else
                         ARMovement(pos);
-                    //ArDebug();
+                    
                     break;
 
                 case TouchPhase.Ended:
                     break;
             }
         }
+        ArDebug();
     }
 
     private void ArDebug()
     {
-        if (!m_isARObjectSelected || m_arObject == null)
+        if (m_arInteractionObject==null || m_arObject == null)
         {
             return;
         }
@@ -151,6 +152,10 @@ public class ObjectManipulation : MonoBehaviour
             // Lógica original para objetos interactivos
             if (hitARObject.collider.transform.TryGetComponent(out ARInteractionObject _))
             {
+                if (m_arInteractionObject!=null)
+                {
+                    m_arInteractionObject.DesactivateDebugger();
+                }
                 m_arObject = hitARObject.transform.gameObject;
                 m_arInteractionObject = hitARObject.transform.gameObject.GetComponent<ARInteractionObject>();
                 return true;
