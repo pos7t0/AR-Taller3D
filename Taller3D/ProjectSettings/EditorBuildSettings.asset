@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Pruebas.unity
     guid: 07877fd8fbb8c7046bd1dd4165d14bab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/pruebas Nivel 2.unity
     guid: f7c988807b013064f965ac30518195b5
   - enabled: 0

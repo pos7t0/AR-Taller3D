@@ -33,11 +33,7 @@ public class ObjectManipulation : MonoBehaviour
 
     [SerializeField] private bool m_changeAxis;
 
-    private void Start()
-    {
-        //m_arCamera = Camera.main;
-        
-    }
+
     private void OnEnable()
     {
         EnhancedTouchSupport.Enable();
@@ -65,6 +61,7 @@ public class ObjectManipulation : MonoBehaviour
                         ARRotation(pos);
                     else
                         ARMovement(pos);
+                    //ArDebug();
                     break;
 
                 case TouchPhase.Ended:
@@ -73,6 +70,15 @@ public class ObjectManipulation : MonoBehaviour
         }
     }
 
+    private void ArDebug()
+    {
+        if (!m_isARObjectSelected || m_arObject == null)
+        {
+            return;
+        }
+
+        m_arInteractionObject.setDebugSystem(m_isRotationMode,m_changeAxis);
+    }
     private void ARMovement(Vector2 pos)
     {
         

@@ -13,10 +13,25 @@ public class PuzzleSystem : MonoBehaviour
         ShowInFrontOfCamera(2);
         m_sliderProgress.value = 0;
         m_sliderProgress.maxValue = m_pieces.Length;
+        ChangeSlider();
+    }
+
+    private void ChangeSlider()
+    {
+        if (m_sliderProgress.value <= 0)
+        {
+            m_sliderProgress.fillRect.GetComponent<CanvasRenderer>().SetAlpha(0);
+
+        }
+        else
+        {
+            m_sliderProgress.fillRect.GetComponent<CanvasRenderer>().SetAlpha(1);
+        }
     }
     public void CompletePuzzle()
     {
         m_sliderProgress.value +=1;
+        ChangeSlider();
         if (PuzzleIsReady())
         {
 

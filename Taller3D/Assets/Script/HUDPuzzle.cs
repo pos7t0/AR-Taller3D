@@ -10,6 +10,7 @@ public class HUDPuzzle : MonoBehaviour
     [SerializeField] private SpawnObject m_spawnObject;
     [SerializeField] private GameObject[] m_piecesToPut;
     [SerializeField] private Transform m_contentTransform;
+    
 
     public void AddElement(TypeOfBone typeOfBone)
     {
