@@ -9,7 +9,7 @@ public class HUDShotter : MonoBehaviour
     [SerializeField] private Slider m_healthVar;
     [SerializeField] private GameObject m_BTNShotter;
     [SerializeField] private GameObject m_imagerPoint;
-
+    [SerializeField] private GameObject m_winPanel;
     #region Nombre de huesos
     private Dictionary<TypeOfBone, string> boneNames = new Dictionary<TypeOfBone, string>()
     {
@@ -58,6 +58,11 @@ public class HUDShotter : MonoBehaviour
     {
         m_healthVar.maxValue =health;
         m_healthVar.value = health;
+    }
+
+    public void ShowWinPanel()
+    {
+        m_winPanel.SetActive(true);
     }
     public void ChangeSlider(float health)
     {

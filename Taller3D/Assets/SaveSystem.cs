@@ -15,6 +15,7 @@ public class SaveSystem : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private bool m_debugUnlockAll;
+    [SerializeField] private bool m_debuglockAll;
 
 
     void Start()
@@ -26,6 +27,13 @@ public class SaveSystem : MonoBehaviour
             PlayerPrefs.SetInt("lvl1_completado", 1);
             PlayerPrefs.SetInt("lvl2_completado", 1);
             PlayerPrefs.SetInt("lvl3_completado", 1);
+            PlayerPrefs.Save();
+        }
+        if (m_debuglockAll)
+        {
+            PlayerPrefs.SetInt("lvl1_completado", 0);
+            PlayerPrefs.SetInt("lvl2_completado", 0);
+            PlayerPrefs.SetInt("lvl3_completado", 0);
             PlayerPrefs.Save();
         }
 
@@ -41,7 +49,7 @@ public class SaveSystem : MonoBehaviour
         // Habilitar botón especial si todos están completados
         if (m_specialButton != null)
         {
-            bool allLevelsComplete = lvl1Complete && lvl2Complete && lvl3Complete;
+            bool allLevelsComplete = lvl1Complete || lvl2Complete || lvl3Complete;
             m_specialButton.SetActive(allLevelsComplete);
 
             // Opcional: Ocultar icono de candado

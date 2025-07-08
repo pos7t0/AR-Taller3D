@@ -331,6 +331,7 @@ MonoBehaviour:
   m_specialButton: {fileID: 2062950221}
   m_lockIcon: {fileID: 0}
   m_debugUnlockAll: 0
+  m_debuglockAll: 0
 --- !u!4 &330360967
 Transform:
   m_ObjectHideFlags: 0

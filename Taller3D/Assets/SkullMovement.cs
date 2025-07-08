@@ -17,6 +17,7 @@ public class SkullMovement : MonoBehaviour
     private float m_minDistanceFromPlayer = 1.5f; // Puedes ajustarlo
     private float m_reachDistance = 0.1f;
     private bool m_isWaiting = false;
+    private bool m_stopGame = false;
 
     private ARPlane planoBase;
     private float m_timerWeakZone=0f;
@@ -35,6 +36,11 @@ public class SkullMovement : MonoBehaviour
 
     void Update()
     {
+        if (m_stopGame)
+        {
+            return;
+        }
+
         ChangeWeakZone();
         if (!m_isWaiting)
         {
@@ -126,6 +132,11 @@ public class SkullMovement : MonoBehaviour
             m_health -= damage;
             m_hudShotter.ChangeSlider(m_health);
         }
+        if (m_health<=0)
+        {
+            m_stopGame = true;
+            m_animator.SetTrigger("Death");
+        }
     }
     public TypeOfBone GetWeakZone()
     {
@@ -194,7 +205,10 @@ public class SkullMovement : MonoBehaviour
             transform.rotation = lookRotation;
         }
     }
-
+    public void WinHud()
+    {
+        FindAnyObjectByType<HUDShotter>().ShowWinPanel();
+    }
     public void OnIdleAnimationComplete()
     {
         m_isWaiting = false;
