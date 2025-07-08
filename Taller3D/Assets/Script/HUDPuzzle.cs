@@ -19,6 +19,7 @@ public class HUDPuzzle : MonoBehaviour
             Debug.Log("");
             if (a.GetComponent<TypeOfPiece>().GetTypeBone()==typeOfBone)
             {
+            
                 a.SetActive(true);
                 return;
             }
@@ -38,6 +39,7 @@ public class HUDPuzzle : MonoBehaviour
     public void HideButton(GameObject button)
     {
         button.SetActive(false);
+        m_piecesPanel.SetTrigger("Hide");
     }
 
 
