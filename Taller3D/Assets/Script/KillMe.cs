@@ -5,21 +5,20 @@ using UnityEngine.Networking;
 
 public class KillMe : MonoBehaviour
 {
-    private DateTime expirationDate = new DateTime(2025, 9, 6); // Fecha limite
+    private DateTime expirationDateUtc = new DateTime(2025, 9, 6, 0, 0, 0, DateTimeKind.Utc); // Expira el 6 de septiembre de 2025 (UTC)
     private const string installDateKey = "InstallDate";
     private int fallbackDays = 30;
 
     void Start()
     {
-        CheckTimeFromHardware(); 
-        CheckFallbackLocalDate();
+        CheckHardwareTime();
+        CheckLocalInstallDate();
         StartCoroutine(CheckDateFromWeb());
     }
 
     IEnumerator CheckDateFromWeb()
     {
         UnityWebRequest request = UnityWebRequest.Head("https://www.google.cl");
-
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
@@ -28,35 +27,26 @@ public class KillMe : MonoBehaviour
 
             if (!string.IsNullOrEmpty(dateHeader))
             {
-                // Convertir la cabecera del servidor a DateTime UTC
                 DateTime serverUtcDate = DateTime.Parse(dateHeader).ToUniversalTime();
                 Debug.Log("Fecha UTC del servidor: " + serverUtcDate);
 
-                // Convertir a hora de Chile
-                TimeZoneInfo chileTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific SA Standard Time");
-                DateTime chileDate = TimeZoneInfo.ConvertTimeFromUtc(serverUtcDate, chileTimeZone);
-                Debug.Log("Fecha del servidor en hora de Chile: " + chileDate);
-
-                // Fecha l�mite (hora de Chile)
-                DateTime expirationDateChile = new DateTime(2025, 7, 6, 0, 0, 0);
-
-                if (chileDate > expirationDateChile)
+                if (serverUtcDate > expirationDateUtc)
                 {
-                    KillApp("Expir� por hora del servidor en Chile.");
+                    KillApp("Expiró por fecha del servidor.");
                 }
                 else
                 {
-                    Debug.Log("Aplicaci�n v�lida seg�n hora de Chile.");
+                    Debug.Log("Aplicación válida según la fecha del servidor.");
                 }
 
                 yield break;
             }
         }
 
-        Debug.LogWarning("Fallo al obtener la fecha del servidor.");
+        Debug.LogWarning("No se pudo obtener la fecha del servidor.");
     }
 
-    void CheckFallbackLocalDate()
+    void CheckLocalInstallDate()
     {
         DateTime installDate;
 
@@ -65,36 +55,37 @@ public class KillMe : MonoBehaviour
             installDate = DateTime.UtcNow;
             PlayerPrefs.SetString(installDateKey, installDate.ToString("O"));
             PlayerPrefs.Save();
-            Debug.Log("Guardando fecha de instalaci�n: " + installDate);
+            Debug.Log("Guardando fecha de instalación local: " + installDate);
         }
         else
         {
             installDate = DateTime.Parse(PlayerPrefs.GetString(installDateKey));
-            Debug.Log("Fecha de instalaci�n recuperada: " + installDate);
+            Debug.Log("Fecha de instalación recuperada: " + installDate);
         }
 
         TimeSpan elapsed = DateTime.UtcNow - installDate;
 
         if (elapsed.TotalDays > fallbackDays)
         {
-            KillApp("Expir� por fecha de instalaci�n local.");
+            KillApp("Expiró por fecha de instalación local.");
         }
         else
         {
-            Debug.Log("Aplicaci�n v�lida seg�n fallback local.");
+            Debug.Log("Aplicación válida según fallback local.");
         }
     }
 
-    void CheckTimeFromHardware()
+    void CheckHardwareTime()
     {
-        DateTime now = DateTime.Now;
-        if (now > expirationDate)
+        DateTime nowUtc = DateTime.UtcNow;
+
+        if (nowUtc > expirationDateUtc)
         {
-            KillApp("Expir� por fecha del sistema.");
+            KillApp("Expiró por fecha del sistema.");
         }
         else
         {
-            Debug.Log("Aplicaci�n v�lida seg�n hora del sistema.");
+            Debug.Log("Aplicación válida según la hora del sistema.");
         }
     }
 
@@ -103,6 +94,17 @@ public class KillMe : MonoBehaviour
         Debug.LogWarning(reason);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_ANDROID
+        try
+        {
+            AndroidJavaObject activity = new AndroidJavaClass("com.unity3d.player.UnityPlayer")
+                .GetStatic<AndroidJavaObject>("currentActivity");
+            activity.Call<bool>("moveTaskToBack", true); // Mueve la app al fondo
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error al cerrar app en Android: " + e.Message);
+        }
 #else
         Application.Quit();
 #endif
