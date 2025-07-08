@@ -1,24 +1,24 @@
 ﻿Hueso;Info;Dato curioso
-Craneo;Protege el cerebro y da forma a la cabeza.;Está compuesto por 22 huesos, muchos de ellos fusionados.
-Mandibula;Es el único hueso móvil del cráneo y forma la mandíbula inferior.;Es esencial para masticar y hablar.
+Craneo;Protege el cerebro, da forma a la cabeza y sostén a los tejidos de la cara.;Está compuesto por 22 huesos: 8 del neurocráneo (cráneo) y 14 del esplacnocráneo (cara).
+Mandibula;Hueso impar y móvil del cráneo, esencial para masticar y hablar.;Por su cara interna se apoyan dos glándulas salivales: sublingual y submandibular.
 
 // Zona media
-Columna;Formada por 33 vértebras, sostiene el cuerpo y protege la médula espinal.;Las hernias discales son una afección común por compresión vertebral.
-Costillas;Protegen los órganos del tórax como pulmones y corazón.;Las costillas pueden fracturarse por impactos o compresión torácica.
-Humero_derecho;Hueso largo del brazo derecho que conecta el hombro con el codo.;Las fracturas de húmero pueden comprometer el nervio radial.
-Humero_izquierdo;Hueso largo del brazo izquierdo que conecta el hombro con el codo.;Las fracturas de húmero pueden comprometer el nervio radial.
-Mano_derecha;Contiene 27 huesos que permiten movimientos finos en la mano derecha.;El síndrome del túnel carpiano es una afección común.
-Mano_izquierda;Contiene 27 huesos que permiten movimientos finos en la mano izquierda.;El síndrome del túnel carpiano es una afección común.
-Omoplato_derecho;Hueso plano que conecta el húmero derecho con la clavícula.;También se le llama escápula y es clave en el movimiento del brazo.
+Columna;Formada por 24 vértebras (7 cervicales, 12 torácicas y 5 lumbares), el sacro y cóccix. Sostiene el cuerpo y protege la médula espinal.;Las hernias discales son una afección común por compresión vertebral.
+Costillas;Son 12 pares. Constituyen el tórax, protegiendo vísceras como pulmones y corazón.;Las costillas flotantes se ubican en la parte inferior del tórax y algunos famosos se las han sacado para disminuir su diámetro de cintura.
+Humero_derecho;Hueso largo ubicado en el segmento brazo, entre el hombro y el codo.;Las fracturas de húmero pueden comprometer el nervio radial.
+Humero_izquierdo;Hueso largo ubicado en el segmento brazo, entre el hombro y el codo.;Las fracturas de húmero pueden comprometer el nervio radial.
+Mano_derecha;Está formado por 27 huesos: carpos a nivel de la muñeca, metacarpo a nivel de la palma y falanges en los dedos.;El dedo pulgar tiene sólo dos falanges, a diferencia de los otros cuatro dedos de la mano.
+Mano_izquierda;Está formado por 27 huesos: carpos a nivel de la muñeca, metacarpo a nivel de la palma y falanges en los dedos.;El dedo pulgar tiene sólo dos falanges, a diferencia de los otros cuatro dedos de la mano.
+Escapula_derecho;Hueso plano e irregular, que conecta junto a la clavícula el húmero al tórax.;También se le llama omóplato y es clave en la unión del miembro superior al tronco.
 Omoplato_izquierdo;Hueso plano que conecta el húmero izquierdo con la clavícula.;También se le llama escápula y es clave en el movimiento del brazo.
-Radio_cubito_derecho;Forman el antebrazo derecho, conectando el codo con la muñeca.;Las fracturas del radio distal son muy comunes al caer con la mano extendida.
-Radio_cubito_izquierdo;Forman el antebrazo izquierdo, conectando el codo con la muñeca.;Las fracturas del radio distal son muy comunes al caer con la mano extendida.
+Radio_derecho;Forma parte del segmento corporal del antebrazo, y se localiza lateral a la ulna. Se encuentra entre el codo y la muñeca.;Las fracturas del radio distal son muy comunes al caer con la mano extendida.
+Radio_izquierdo;Forma parte del segmento corporal del antebrazo, y se localiza lateral a la ulna. Se encuentra entre el codo y la muñeca.;Las fracturas del radio distal son muy comunes al caer con la mano extendida.
 
 // Zona baja
-Femur_derecho;Es el hueso más largo y fuerte del cuerpo humano (derecho).;Las fracturas de femur requieren cirugía y rehabilitación prolongada.
-Femur_izquierdo;Es el hueso más largo y fuerte del cuerpo humano (izquierdo).;Las fracturas de femur requieren cirugía y rehabilitación prolongada.
-Pelvis;Sostiene la columna vertebral y protege órganos internos.;El tamaño y forma de la pelvis puede afectar el parto natural.
-Perone_tibia_derecha;Forman la parte inferior de la pierna derecha, sostienen el peso corporal.;Las fracturas de tibia y peroné son comunes en deportes de contacto.
-perone_tibia_izquierdo;Forman la parte inferior de la pierna izquierda, sostienen el peso corporal.;Las fracturas de tibia y peroné son comunes en deportes de contacto.
+Femur_derecho;Es el hueso más largo y fuerte del cuerpo humano (derecho). Forma parte del segmento corporal muslo.;Las fracturas de femur requieren cirugía y rehabilitación prolongada.
+Femur_izquierdo;Es el hueso más largo y fuerte del cuerpo humano (izquierdo). Forma parte del segmento corporal muslo.;Las fracturas de femur requieren cirugía y rehabilitación prolongada.
+Pelvis;Está formada por los huesos sacro, coccíx y coxales. Protege y contiene estructuras como la vejiga, útero, ovarios, entre otros.;El tamaño y forma de la pelvis es diferente en cada mujer y puede diferenciar los espacios en el canal de parto.
+Tibia_y_fíbula_derecha;Forman parte del segmento corporal pierna, la tibia se ubica hacia medial y la fíbula hacia lateral.;Las fracturas de tibia y peroné son comunes en deportes de contacto.
+Tibia_y_fíbula_izquierdo;Forman parte del segmento corporal pierna, la tibia se ubica hacia medial y la fíbula hacia lateral.;Las fracturas de tibia y peroné son comunes en deportes de contacto.
 pie_derecho;Conformado por 26 huesos, es esencial para el equilibrio y locomoción (derecho).;La fascitis plantar es una dolencia frecuente relacionada con el pie.
 pie_izquierdo;Conformado por 26 huesos, es esencial para el equilibrio y locomoción (izquierdo).;La fascitis plantar es una dolencia frecuente relacionada con el pie.
