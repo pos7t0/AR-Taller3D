@@ -133,11 +133,12 @@ public class ObjectManipulation : MonoBehaviour
     private bool CheckTouchOnARObject(Vector2 touchPosition)
     {
         Ray ray = m_arCamera.ScreenPointToRay(touchPosition);
+        RaycastHit[] hits = Physics.RaycastAll(ray);
 
-        if (Physics.Raycast(ray, out RaycastHit hitARObject))
+        foreach (RaycastHit hit in hits)
         {
             // Primero verifica si es un hueso con información
-            BoneInfoDisplay infoDisplay = hitARObject.collider.GetComponent<BoneInfoDisplay>();
+            BoneInfoDisplay infoDisplay = hit.collider.GetComponent<BoneInfoDisplay>();
             if (infoDisplay != null && infoDisplay.IsShowingInfo())
             {
                 infoDisplay.HideBoneInfo();
@@ -145,23 +146,24 @@ public class ObjectManipulation : MonoBehaviour
             }
             else if (infoDisplay != null)
             {
-                infoDisplay.ShowBoneInfo(hitARObject.collider.GetComponent<ARInteractionObject>());
+                infoDisplay.ShowBoneInfo(hit.collider.GetComponent<ARInteractionObject>());
                 return false;
             }
 
             // Lógica original para objetos interactivos
-            if (hitARObject.collider.transform.TryGetComponent(out ARInteractionObject _))
+            if (hit.collider.transform.TryGetComponent(out ARInteractionObject interactionObj))
             {
-                if (m_arInteractionObject!=null)
+                if (interactionObj.CanMove() || interactionObj.CanRotate())
                 {
-                    m_arInteractionObject.DesactivateDebugger();
+                    if (m_arInteractionObject != null)
+                        m_arInteractionObject.DesactivateDebugger();
+
+                    m_arObject = hit.transform.gameObject;
+                    m_arInteractionObject = interactionObj;
+                    return true;
                 }
-                m_arObject = hitARObject.transform.gameObject;
-                m_arInteractionObject = hitARObject.transform.gameObject.GetComponent<ARInteractionObject>();
-                return true;
             }
         }
-
         return false;
     }
 

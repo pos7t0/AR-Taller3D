@@ -11,6 +11,8 @@ public class HUDPuzzle : MonoBehaviour
     [SerializeField] private GameObject[] m_piecesToPut;
     [SerializeField] private Transform m_contentTransform;
     [SerializeField] private GameObject m_winPanel;
+    
+
 
     public void AddElement(TypeOfBone typeOfBone)
     {

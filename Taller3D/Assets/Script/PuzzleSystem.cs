@@ -7,6 +7,8 @@ public class PuzzleSystem : MonoBehaviour
     [SerializeField] private Slider m_sliderProgress;
     [SerializeField] private string namelevel;
 
+    [SerializeField] private AudioSource m_audio;
+
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class PuzzleSystem : MonoBehaviour
     }
     public void CompletePuzzle()
     {
+        m_audio.Play();
         m_sliderProgress.value +=1;
         ChangeSlider();
         if (PuzzleIsReady())

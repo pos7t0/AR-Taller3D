@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Pruebas.unity
     guid: 07877fd8fbb8c7046bd1dd4165d14bab
   - enabled: 1
-    path: Assets/Scenes/Nivel2.unity
-    guid: f7c988807b013064f965ac30518195b5
-  - enabled: 1
     path: Assets/Scenes/Inicio.unity
     guid: a96f5c7bb5d090d4c86435cd9236c26a
   - enabled: 1
@@ -32,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LVL_ArmarBaja.unity
     guid: 8a4ea72dbad751e418b980c6ecadb01b
+  - enabled: 1
+    path: Assets/Scenes/Nivel2.unity
+    guid: f7c988807b013064f965ac30518195b5
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 6ee72d15cf39dd748a13eac57397b9af,
       type: 2}

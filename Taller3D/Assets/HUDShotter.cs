@@ -10,6 +10,12 @@ public class HUDShotter : MonoBehaviour
     [SerializeField] private GameObject m_BTNShotter;
     [SerializeField] private GameObject m_imagerPoint;
     [SerializeField] private GameObject m_winPanel;
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource m_audio;
+    [SerializeField] private AudioClip m_wrongAudio;
+    [SerializeField] private AudioClip m_goodAudio;
+
     #region Nombre de huesos
     private Dictionary<TypeOfBone, string> boneNames = new Dictionary<TypeOfBone, string>()
     {
@@ -44,6 +50,15 @@ public class HUDShotter : MonoBehaviour
     void Start()
     {
         
+    }
+
+    public void GoodAudio()
+    {
+        m_audio.PlayOneShot(m_goodAudio);
+    }
+    public void BadAudio()
+    {
+        m_audio.PlayOneShot(m_wrongAudio);
     }
 
     public void ShowWeakText(TypeOfBone weakBone)

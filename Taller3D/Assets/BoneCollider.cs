@@ -16,8 +16,12 @@ public class BoneCollider : MonoBehaviour
     [SerializeField] private TypeOfBone m_boneName;
     [SerializeField] private float damage=1f;
 
+    private HUDShotter m_hud;
+
     private void Start()
     {
+        m_hud=FindAnyObjectByType<HUDShotter>();
+        
         m_originalMaterial = m_meshRenderer.material.color;
     }
     private void Update()
@@ -26,34 +30,7 @@ public class BoneCollider : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent(out BulletSystem bullet))
-        {
-            if (bullet.m_collision)
-            {
-                return;
-            }
-            bullet.m_collision = true;
-            m_timer = 0;
-            SkullMovement skull = GetComponentInParent<SkullMovement>();
-            if (skull.GetWeakZone()==m_boneName)
-            {
-                Debug.Log("bueno");
-                ChangeColor(m_goodMaterial);
-                skull.TakeDamage(m_boneName, damage);
-                Destroy(collision.gameObject);
-                
-            }
-            else
-            {
-                Debug.Log("malo");
-                ChangeColor(m_wrongMaterial);
-                Destroy(collision.gameObject);
-            }
-            
-        }
-    }
+    
 
     public void ReceiveHit(BulletSystem bullet)
     {
@@ -69,12 +46,14 @@ public class BoneCollider : MonoBehaviour
 
         if (skull.GetWeakZone() == m_boneName)
         {
+            m_hud.GoodAudio();
             Debug.Log("Impacto bueno");
             ChangeColor(m_goodMaterial);
             skull.TakeDamage(m_boneName, damage);
         }
         else
         {
+            m_hud.BadAudio();
             Debug.Log("Impacto malo");
             ChangeColor(m_wrongMaterial);
         }

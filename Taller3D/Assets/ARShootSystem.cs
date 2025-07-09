@@ -32,7 +32,7 @@ public class ARShootSystem : MonoBehaviour
         Quaternion rotacion = Camera.main.transform.rotation;
 
         GameObject proyectil = Instantiate(proyectilPrefab, origen, rotacion);
-        m_audioSource.PlayOneShot(m_shootSound);
+        //m_audioSource.PlayOneShot(m_shootSound);
         // Aplicar fuerza en la direcci�n de la c�mara
         Rigidbody rb = proyectil.GetComponent<Rigidbody>();
         if (rb != null)
