@@ -273,6 +273,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 18718147}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &18718149 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555481706523565574, guid: dc3057016bb866847a76bea168ff1061,
+    type: 3}
+  m_PrefabInstance: {fileID: 18718147}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &26387596
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +696,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 58633774}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &58633776 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7750846561645050707, guid: d22ca4b8d4545b041b963a3e0c8bd8d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 58633774}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &84670109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3057,10 +3081,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_arObject: {fileID: 0}
   m_arCamera: {fileID: 1538702647}
-  m_axisToggleButtonImage: {fileID: 0}
+  m_axisToggleButtonImage: {fileID: 18718149}
   m_xzAxisSprite: {fileID: -937357416, guid: 8da1067d0e1fdf64681cc55b3d05308a, type: 3}
   m_yAxisSprite: {fileID: -1690540749, guid: 8da1067d0e1fdf64681cc55b3d05308a, type: 3}
-  transformToggleButtonImage: {fileID: 0}
+  transformToggleButtonImage: {fileID: 58633776}
   transform: {fileID: 1757167952, guid: aba76cb7be32e9a44bc00415c3d05e80, type: 3}
   rotate: {fileID: -1837174850, guid: aba76cb7be32e9a44bc00415c3d05e80, type: 3}
   m_isRotationMode: 1
