@@ -1,0 +1,1 @@
+C:\Users\Patricio\Documents\Github\AR-Taller3D\Taller3D\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\Debug\y5d3t1my\obj\arm64-v8a
