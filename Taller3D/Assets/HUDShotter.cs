@@ -30,17 +30,17 @@ public class HUDShotter : MonoBehaviour
         { TypeOfBone.Humero_izquierdo, "Húmero izquierdo" },
         { TypeOfBone.Mano_derecha, "Mano derecha" },
         { TypeOfBone.Mano_izquierda, "Mano izquierda" },
-        { TypeOfBone.Omoplato_derecho, "Omóplato derecho" },
+        { TypeOfBone.Escapula_derecho, "Escapula derecho" },
         { TypeOfBone.Omoplato_izquierdo, "Omóplato izquierdo" },
-        { TypeOfBone.Radio_cubito_derecho, "Radio y cúbito derechos" },
-        { TypeOfBone.Radio_cubito_izquierdo, "Radio y cúbito izquierdos" },
+        { TypeOfBone.Radio_derecho, "Radio derechos" },
+        { TypeOfBone.Radio_izquierdo, "Radio izquierdos" },
     
         // Zona baja
         { TypeOfBone.Femur_derecho, "Fémur derecho" },
         { TypeOfBone.Femur_izquierdo, "Fémur izquierdo" },
         { TypeOfBone.Pelvis, "Pelvis" },
-        { TypeOfBone.Perone_tibia_derecha, "Peroné y tibia derechos" },
-        { TypeOfBone.perone_tibia_izquierdo, "Peroné y tibia izquierdos" },
+        { TypeOfBone.Tibia_y_fíbula_derecha, "tibia y fibula derechos" },
+        { TypeOfBone.Tibia_y_fíbula_izquierdo, "tibia y fibula izquierdos" },
         { TypeOfBone.pie_derecho, "Pie derecho" },
         { TypeOfBone.pie_izquierdo, "Pie izquierdo" }
     };

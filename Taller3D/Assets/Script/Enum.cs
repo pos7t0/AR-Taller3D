@@ -5,12 +5,12 @@ public enum TypeOfBone
 
     //zona media
     Columna,Costillas,Humero_derecho, Humero_izquierdo,
-    Mano_derecha, Mano_izquierda, Omoplato_derecho, Omoplato_izquierdo,
-    Radio_cubito_derecho, Radio_cubito_izquierdo,
+    Mano_derecha, Mano_izquierda, Escapula_derecho, Omoplato_izquierdo,
+    Radio_derecho, Radio_izquierdo,
     
     //zona Baja
 
-    Femur_derecho,Femur_izquierdo,Pelvis, Perone_tibia_derecha,
-    perone_tibia_izquierdo, pie_derecho, pie_izquierdo
+    Femur_derecho,Femur_izquierdo,Pelvis, Tibia_y_fíbula_derecha,
+    Tibia_y_fíbula_izquierdo, pie_derecho, pie_izquierdo
 
 }
