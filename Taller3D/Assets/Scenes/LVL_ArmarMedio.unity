@@ -3677,7 +3677,7 @@ MonoBehaviour:
   m_xzAxisSprite: {fileID: -937357416, guid: 8da1067d0e1fdf64681cc55b3d05308a, type: 3}
   m_yAxisSprite: {fileID: -1690540749, guid: 8da1067d0e1fdf64681cc55b3d05308a, type: 3}
   transformToggleButtonImage: {fileID: 506351938}
-  transform: {fileID: -1690540749, guid: 8da1067d0e1fdf64681cc55b3d05308a, type: 3}
+  transform: {fileID: 1757167952, guid: aba76cb7be32e9a44bc00415c3d05e80, type: 3}
   rotate: {fileID: -1837174850, guid: aba76cb7be32e9a44bc00415c3d05e80, type: 3}
   m_isRotationMode: 1
   m_speedMovement: 4
@@ -4988,6 +4988,14 @@ MonoBehaviour:
   m_piecesToPut:
   - {fileID: 103195994}
   - {fileID: 1343744356}
+  - {fileID: 1531419815}
+  - {fileID: 1976852825}
+  - {fileID: 1703510999}
+  - {fileID: 1280599257}
+  - {fileID: 1930441510}
+  - {fileID: 161265634}
+  - {fileID: 1222144}
+  - {fileID: 1103177962}
   m_contentTransform: {fileID: 527308692}
   m_winPanel: {fileID: 0}
 --- !u!1 &1930441510 stripped
@@ -5202,7 +5210,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03425926, y: 0.7444229}
   m_AnchorMax: {x: 1, y: 0.92800003}
-  m_AnchoredPosition: {x: -12.845642, y: 0.49969482}
+  m_AnchoredPosition: {x: -12.845642, y: 0.49975586}
   m_SizeDelta: {x: -890.8901, y: -339.07812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2043564235

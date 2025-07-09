@@ -27,6 +27,7 @@ public class HUDPuzzle : MonoBehaviour
             }
             
         }
+        Debug.Log("no se encontro");
     }
 
     
